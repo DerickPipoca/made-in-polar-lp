@@ -1,12 +1,96 @@
 {
   "company": {
     "name": "Made In Polar",
+    "cnpj": "01.000.000/0001-00",
     "contactPerson": "Mateus Alves",
+    "description": "Especialistas em higienização profunda e manutenção de ar-condicionado residencial e comercial em Paranavaí e região. Serviço limpo, rápido e com garantia.",
+    "url": "https://madeinpolar.com.br",
     "instagram": "@madepolar",
-    "instagramUrl": "https://instagram.com/madepolar"
+    "instagramUrl": "https://www.instagram.com/madepolar"
   },
   "contact": {
     "whatsappNumber": "5544991416128",
     "displayPhone": "(44) 99141-6128"
-  }
+  },
+  "location": {
+    "city": "Paranavaí",
+    "state": "PR",
+    "stateName": "Paraná",
+    "country": "BR",
+    "postalCode": "87700-000"
+  },
+  "testimonials": [
+    {
+      "name": "Ricardo M.",
+      "role": "Proprietário de Residência • Jardim Ipê",
+      "rating": 5,
+      "comment": "Meu ar não gelava mais nada e estava com cheiro forte. Fizeram a limpeza com aquela bolsa coletora, não caiu uma gota de água na parede e o ar voltou a gelar como novo!"
+    },
+    {
+      "name": "Dra. Camila F.",
+      "role": "Clínica Odontológica • Centro, Paranavaí",
+      "rating": 5,
+      "comment": "Pontualidade impecável. Higienizaram os 4 aparelhos da clínica no sábado de manhã, emitiram a Nota Fiscal certinho e deixaram o ambiente super limpo."
+    },
+    {
+      "name": "Eduardo T.",
+      "role": "Escritório de Contabilidade • Centro",
+      "rating": 5,
+      "comment": "Serviço muito profissional. A água que saiu dos aparelhos estava preta de sujeira. Depois da limpeza, o ar ficou muito mais silencioso e eficiente."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "A limpeza faz sujeira na parede ou no chão?",
+      "answer": "Não. Utilizamos uma bolsa coletora impermeável profissional que envolve todo o ar-condicionado durante a lavagem. Toda a água suja e os resíduos vão direto por uma mangueira para um reservatório fechado, mantendo sua parede, pintura e móveis intactos."
+    },
+    {
+      "question": "Precisa retirar o ar-condicionado da parede?",
+      "answer": "Na grande maioria dos casos, não. A higienização profunda é realizada com o aparelho instalado no próprio local, desmontando apenas a carenagem frontal, filtros e acessórios para acessar a turbina e a serpentina com total segurança."
+    },
+    {
+      "question": "Quanto tempo demora a higienização de cada aparelho?",
+      "answer": "Em média, de 45 minutos a 1h15 por aparelho (modelo Split convencional ou Inverter), dependendo do nível de sujidade acumulada e da altura de instalação."
+    },
+    {
+      "question": "De quanto em quanto tempo devo higienizar meu ar-condicionado?",
+      "answer": "Para residências em Paranavaí, recomendamos a higienização profunda a cada 6 meses (ou antes do início do verão intenso). Para clínicas, consultórios e comércios com alto fluxo de pessoas, o ideal é a cada 3 a 4 meses."
+    },
+    {
+      "question": "Vocês atendem empresas e emitem Nota Fiscal?",
+      "answer": "Sim! Somos empresa regularizada (MEI) e emitimos Nota Fiscal de Serviço (NFS-e) para csultórios, escritórios, comércios e condomínios."
+    }
+  ],
+  "gallery": [
+    {
+      "image": "/galeria/img3.jpg",
+      "tag": "Higienização Profunda",
+      "title": "Lavagem com Bolsa Coletora",
+      "description": "Proteção 100% impermeável na parede durante o jateamento da turbina."
+    },
+    {
+      "image": "/galeria/img1.jpg",
+      "tag": "Antes e Depois",
+      "title": "Descontaminação da Turbina",
+      "description": "Remoção completa de fungos, lodo e crostas de poeira que impediam o vento."
+    },
+    {
+      "image": "/galeria/img5.jpg",
+      "tag": "Instalação",
+      "title": "Acabamento Residencial Limpo",
+      "description": "Profissional e impecável no ambiente."
+    },
+    {
+      "image": "/galeria/img4.jpg",
+      "tag": "Manutenção Técnica",
+      "title": "Revisão de Condensadora e Gás",
+      "description": "Aferição com manômetro digital e limpeza externa para reduzir o consumo elétrico."
+    },
+    {
+      "image": "/galeria/img2.jpg",
+      "tag": "Elétrica",
+      "title": "Circuito Elétrico Dedicado",
+      "description": "Dimensionamento seguro de cabos e disjuntores para climatização comercial."
+    }
+  ]
 }

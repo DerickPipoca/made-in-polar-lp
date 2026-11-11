@@ -1,10 +1,12 @@
 ---
 import { createWhatsAppUrl } from '../../utils/whatsapp';
 import ScrollIndicator from '../ui/ScrollIndicator.astro';
+import business from '../../data/business.json';
 
+const firstName = business.company.contactPerson.split(' ')[0];
 const whatsappUrl = createWhatsAppUrl(
-  "5544991416128",
-  "Olá, Mateus! Vim pelo site da Made In Polar e gostaria de um orçamento para meu ar-condicionado em Paranavaí."
+  business.contact.whatsappNumber,
+  `Olá, ${firstName}! Vim pelo site da ${business.company.name} e gostaria de um orçamento para meu ar-condicionado em ${business.location.city}.`
 );
 ---
 

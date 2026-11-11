@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import business from '../data/business.json';
 
 interface Props {
   title?: string;
@@ -7,9 +8,65 @@ interface Props {
 }
 
 const { 
-  title = "Made In Polar | Climatização e Elétrica em Paranavaí", 
-  description = "Higienização profunda, instalação e manutenção de ar-condicionado em Paranavaí e região." 
+  title = `${business.company.name} | Climatização e Elétrica em ${business.location.city}`, 
+  description = business.company.description 
 } = Astro.props;
+
+const schemaData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "HVACBusiness",
+    "name": business.company.name,
+    "description": business.company.description,
+    "url": business.company.url,
+    "telephone": `+${business.contact.whatsappNumber}`,
+    "taxID": business.company.cnpj,
+    "founder": {
+      "@type": "Person",
+      "name": business.company.contactPerson
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": business.location.city,
+      "addressRegion": business.location.state,
+      "postalCode": business.location.postalCode,
+      "addressCountry": business.location.country
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": business.location.city,
+      "containedInPlace": {
+        "@type": "State",
+        "name": business.location.stateName
+      }
+    },
+    "sameAs": [business.company.instagramUrl],
+    "priceRange": "$$",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5.0",
+      "reviewCount": String(business.testimonials.length)
+    },
+    "review": business.testimonials.map((t) => ({
+      "@type": "Review",
+      "author": { "@type": "Person", "name": t.name },
+      "reviewRating": { "@type": "Rating", "ratingValue": String(t.rating) },
+      "reviewBody": t.comment
+    }))
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": business.faqs.map((faq) => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  }
+];
 ---
 
 <!doctype html>
@@ -17,9 +74,26 @@ const {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#061022" />
+
+    <link rel="icon" type="image/svg+xml" href="/logo-madeinpolar.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="canonical" href={business.company.url} />
+
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+
+    {/* Open Graph */}
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:url" content={business.company.url} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content={business.company.name} />
+
+    {/* Dados Estruturados JSON-LD (Empresa + Avaliações + FAQ) */}
+    <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
   </head>
   <body class="w-full min-h-screen m-0 p-0 bg-[#061022] text-slate-100 antialiased selection:bg-vivid selection:text-white overflow-x-hidden relative">
     
@@ -34,23 +108,52 @@ const {
       <slot />
     </div>
 
+    {/* Indicadores Laterais de Lâmina (Desktop) */}
+    <div id="deck-dots" class="hidden lg:flex fixed right-6 top-1/2 -translate-y-1/2 z-40 flex-col gap-3">
+      <button data-slide="0" aria-label="Início" class="deck-dot w-2.5 h-2.5 rounded-full bg-vivid scale-125 transition-all duration-300 cursor-pointer"></button>
+      <button data-slide="1" aria-label="Diferenciais" class="deck-dot w-2.5 h-2.5 rounded-full bg-white/20 hover:bg-white/50 transition-all duration-300 cursor-pointer"></button>
+      <button data-slide="2" aria-label="Serviços" class="deck-dot w-2.5 h-2.5 rounded-full bg-white/20 hover:bg-white/50 transition-all duration-300 cursor-pointer"></button>
+      <button data-slide="3" aria-label="Como Funciona" class="deck-dot w-2.5 h-2.5 rounded-full bg-white/20 hover:bg-white/50 transition-all duration-300 cursor-pointer"></button>
+      <button data-slide="4" aria-label="Galeria" class="deck-dot w-2.5 h-2.5 rounded-full bg-white/20 hover:bg-white/50 transition-all duration-300 cursor-pointer"></button>
+      <button data-slide="5" aria-label="Avaliações" class="deck-dot w-2.5 h-2.5 rounded-full bg-white/20 hover:bg-white/50 transition-all duration-300 cursor-pointer"></button>
+      <button data-slide="6" aria-label="FAQ e Contato" class="deck-dot w-2.5 h-2.5 rounded-full bg-white/20 hover:bg-white/50 transition-all duration-300 cursor-pointer"></button>
+    </div>
+
     <script is:inline>
       function initDeckController() {
         const container = document.getElementById('deck-container');
         const slides = Array.from(document.querySelectorAll('.deck-slide'));
+        const dots = Array.from(document.querySelectorAll('.deck-dot'));
+        const navLinks = Array.from(document.querySelectorAll('header nav a'));
         if (!container || !slides.length) return;
 
         let currentIndex = 0;
         let isAnimating = false;
-        const SCROLL_DURATION = 800; // Duração exata da transição (0.8s)
+        const SCROLL_DURATION = 800;
 
         function activateSlide(index) {
           slides.forEach((s, i) => {
             s.classList.toggle('is-active', i === index);
           });
+
+          dots.forEach((dot, i) => {
+            if (i === index) {
+              dot.classList.add('bg-vivid', 'scale-125');
+              dot.classList.remove('bg-white/20');
+            } else {
+              dot.classList.remove('bg-vivid', 'scale-125');
+              dot.classList.add('bg-white/20');
+            }
+          });
+
+          const activeId = slides[index]?.id;
+          navLinks.forEach((link) => {
+            const isMatch = link.getAttribute('href') === `#${activeId}`;
+            link.classList.toggle('text-vivid', isMatch);
+            link.classList.toggle('font-bold', isMatch);
+          });
         }
 
-        // Rolagem matemática contínua sem interferência do scroll-snap do navegador
         function smoothScrollContainer(targetY, duration, onComplete) {
           const startY = container.scrollTop;
           const difference = targetY - startY;
@@ -71,7 +174,7 @@ const {
             if (elapsed < duration) {
               requestAnimationFrame(step);
             } else {
-              container.scrollTop = targetY; // Crava no pixel final exato
+              container.scrollTop = targetY;
               if (onComplete) onComplete();
             }
           }
@@ -92,12 +195,10 @@ const {
           });
         }
 
-        // Mantém cravado na seção atual se redimensionar a janela ou trocar de monitor
         window.addEventListener('resize', () => {
           container.scrollTop = slides[currentIndex].offsetTop;
         });
 
-        // 1. Desktop: Roda do mouse
         let wheelDelta = 0;
         container.addEventListener('wheel', (e) => {
           e.preventDefault();
@@ -115,7 +216,6 @@ const {
           }
         }, { passive: false });
 
-        // 2. Mobile: Gesto de Swipe (Deslizar o dedo)
         let touchStartY = 0;
         let touchStartX = 0;
 
@@ -125,6 +225,13 @@ const {
         }, { passive: true });
 
         container.addEventListener('touchmove', (e) => {
+          if (e.target.closest('[data-horizontal-scroll]')) {
+            const currentX = e.touches[0].clientX;
+            const currentY = e.touches[0].clientY;
+            if (Math.abs(currentX - touchStartX) > Math.abs(currentY - touchStartY)) {
+              return;
+            }
+          }
           e.preventDefault();
         }, { passive: false });
 
@@ -142,7 +249,6 @@ const {
           }
         }, { passive: true });
 
-        // 3. Setas do Teclado
         window.addEventListener('keydown', (e) => {
           if (e.key === 'ArrowDown' || e.key === 'PageDown') {
             e.preventDefault();
@@ -153,7 +259,6 @@ const {
           }
         });
 
-        // 4. Cliques no Menu e no botão "Role para explorar"
         document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
           anchor.addEventListener('click', (e) => {
             const targetId = anchor.getAttribute('href').slice(1);
@@ -165,7 +270,13 @@ const {
           });
         });
 
-        // 5. Fecha perguntas anteriores do FAQ ao abrir uma nova
+        dots.forEach((dot) => {
+          dot.addEventListener('click', () => {
+            const targetIdx = Number(dot.getAttribute('data-slide'));
+            goToSlide(targetIdx);
+          });
+        });
+
         const detailsList = document.querySelectorAll('details');
         detailsList.forEach((targetDetail) => {
           targetDetail.addEventListener('toggle', () => {

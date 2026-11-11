@@ -1,8 +1,9 @@
 ---
 import { createWhatsAppUrl } from '../../utils/whatsapp';
 import ScrollIndicator from '../ui/ScrollIndicator.astro';
+import business from '../../data/business.json';
 
-const whatsappNumber = "5544991416128";
+const whatsappNumber = business.contact.whatsappNumber;
 
 const services = [
   {

@@ -1,14 +1,16 @@
 ---
 import { createWhatsAppUrl } from '../../utils/whatsapp';
 import ScrollIndicator from '../ui/ScrollIndicator.astro';
+import business from '../../data/business.json';
 
+const firstName = business.company.contactPerson.split(' ')[0];
 const whatsappUrl = createWhatsAppUrl(
-  "5544991416128",
-  "Olá, Mateus! Gostaria de entender melhor como funciona o atendimento da Made In Polar."
+  business.contact.whatsappNumber,
+  `Olá, ${firstName}! Gostaria de entender melhor como funciona o atendimento da ${business.company.name}.`
 );
 ---
 
-<section id="como-funciona" class="deck-slide w-full px-4 sm:px-6 py-3 sm:py-4">
+<section id="como-funciona" class="deck-slide w-full px-4 sm:px-6">
   <div class="hidden sm:block" aria-hidden="true"></div>
 
   <div class="max-w-5xl mx-auto w-full my-auto space-y-5 sm:space-y-6">
@@ -21,17 +23,16 @@ const whatsappUrl = createWhatsAppUrl(
       </h2>
     </div>
 
-    {/* Grelha 2x2 no Mobile e 4 colunas no Desktop */}
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
       <div class="p-4 sm:p-5 rounded-2xl bg-navy/60 border border-white/10 space-y-1.5 sm:space-y-2">
         <span class="text-[10px] sm:text-[11px] font-black px-2 py-0.5 rounded bg-vivid/20 text-vivid inline-block">01. CONTATO</span>
         <h3 class="text-sm sm:text-base font-bold text-white">WhatsApp</h3>
-        <p class="text-[11px] sm:text-xs text-slate-400 leading-relaxed">Informe quantos aparelhos tem direto ao Mateus.</p>
+        <p class="text-[11px] sm:text-xs text-slate-400 leading-relaxed">Informe quantos aparelhos tem direto ao {firstName}.</p>
       </div>
 
       <div class="p-4 sm:p-5 rounded-2xl bg-navy/60 border border-white/10 space-y-1.5 sm:space-y-2">
         <span class="text-[10px] sm:text-[11px] font-black px-2 py-0.5 rounded bg-vivid/20 text-vivid inline-block">02. HORÁRIO</span>
-        <h3 class="text-sm sm:text-base font-bold text-white">Agendamento</h3>
+        <h3 class="text-sm sm:text-base font-bold text-white">Preço Justo</h3>
         <p class="text-[11px] sm:text-xs text-slate-400 leading-relaxed">Orçamento transparente e dia agendado sem atrasos.</p>
       </div>
 
@@ -61,5 +62,5 @@ const whatsappUrl = createWhatsAppUrl(
     </div>
   </div>
 
-  <ScrollIndicator targetId="#contato" label="Dúvidas e Contato" />
+  <ScrollIndicator targetId="#galeria" label="Veja o nosso trabalho" />
 </section>

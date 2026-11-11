@@ -1,0 +1,125 @@
+---
+import ScrollIndicator from '../ui/ScrollIndicator.astro';
+import business from '../../data/business.json';
+
+const gallery = business.gallery || [];
+---
+
+<section id="galeria" class="deck-slide w-full px-4 sm:px-6">
+  <div class="hidden sm:block" aria-hidden="true"></div>
+
+  <div class="max-w-6xl mx-auto w-full my-auto space-y-4 sm:space-y-6">
+    
+    {/* Cabeçalho + Setas de Navegação Horizontal */}
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 px-1">
+      <div class="text-center sm:text-left space-y-1">
+        <span class="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-vivid">
+          Serviço na Prática
+        </span>
+        <h2 class="text-xl sm:text-3xl font-extrabold text-white leading-tight">
+          Veja o Padrão do Nosso Trabalho
+        </h2>
+      </div>
+
+      {/* Botões de Scroll Horizontal (Desktop/Mobile) */}
+      <div class="flex items-center justify-center sm:justify-end gap-2">
+        <button 
+          type="button"
+          id="gallery-prev"
+          aria-label="Foto anterior"
+          class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-navy/80 border border-white/10 hover:border-vivid/50 text-white flex items-center justify-center transition active:scale-95 cursor-pointer"
+        >
+          <svg class="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <button 
+          type="button"
+          id="gallery-next"
+          aria-label="Próxima foto"
+          class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-navy/80 border border-white/10 hover:border-vivid/50 text-white flex items-center justify-center transition active:scale-95 cursor-pointer"
+        >
+          <svg class="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+      </div>
+    </div>
+
+    {/* Trilho de Scroll Horizontal */}
+    <div 
+      id="gallery-track"
+      data-horizontal-scroll
+      class="flex items-stretch gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2 px-1 scrollbar-none [&::-webkit-scrollbar]:hidden"
+    >
+      {gallery.map((item) => (
+        <article class="snap-center shrink-0 w-[78vw] sm:w-[320px] md:w-87.5 rounded-2xl sm:rounded-3xl bg-navy/60 border border-white/10 overflow-hidden flex flex-col justify-between group hover:border-vivid/40 transition">
+          
+          {/* Container da Imagem */}
+          <div class="relative h-44 sm:h-52 w-full bg-[#050d1d] overflow-hidden">
+            <img 
+              src={item.image} 
+              alt={item.title}
+              loading="lazy"
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');"
+            />
+            
+            {/* Placeholder elegante caso a foto ainda não exista na pasta public/galeria/ */}
+            <div class="hidden absolute inset-0 flex-col items-center justify-center p-4 text-center bg-linear-to-br from-navy via-dark to-[#050d1d]">
+              <svg class="w-8 h-8 text-vivid/50 mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
+                <circle cx="9" cy="9" r="2"/>
+                <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
+              </svg>
+              <span class="text-[11px] text-slate-400 font-medium">{item.image}</span>
+            </div>
+
+            {/* Badge de Categoria sobre a foto */}
+            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#061022]/85 text-vivid border border-vivid/30 backdrop-blur-md">
+              {item.tag}
+            </span>
+          </div>
+
+          {/* Legenda do Card */}
+          <div class="p-4 sm:p-5 space-y-1">
+            <h3 class="text-sm sm:text-base font-bold text-white leading-snug">
+              {item.title}
+            </h3>
+            <p class="text-[11px] sm:text-xs text-slate-300 leading-relaxed">
+              {item.description}
+            </p>
+          </div>
+
+        </article>
+      ))}
+    </div>
+
+  </div>
+
+  <ScrollIndicator targetId="#avaliacoes" label="O que dizem nossos clientes" />
+</section>
+
+<script is:inline>
+  function initGalleryCarousel() {
+    const track = document.getElementById('gallery-track');
+    const prevBtn = document.getElementById('gallery-prev');
+    const nextBtn = document.getElementById('gallery-next');
+    if (!track || !prevBtn || !nextBtn) return;
+
+    const getScrollStep = () => {
+      const firstCard = track.querySelector('article');
+      return firstCard ? firstCard.offsetWidth + 16 : 320;
+    };
+
+    prevBtn.addEventListener('click', () => {
+      track.scrollBy({ left: -getScrollStep(), behavior: 'smooth' });
+    });
+
+    nextBtn.addEventListener('click', () => {
+      track.scrollBy({ left: getScrollStep(), behavior: 'smooth' });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGalleryCarousel);
+  } else {
+    initGalleryCarousel();
+  }
+</script>
