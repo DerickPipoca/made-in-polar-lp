@@ -1,13 +1,23 @@
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/sections/Header.astro';
+import Hero from '../components/sections/Hero.astro';
+import BentoDetails from '../components/sections/BentoDetails.astro';
+import Services from '../components/sections/Services.astro';
+import HowItWorks from '../components/sections/HowItWorks.astro';
+import Footer from '../components/sections/Footer.astro';
+---
+
+<BaseLayout 
+  title="Made In Polar | Climatização, Refrigeração e Elétrica em Paranavaí"
+  description="Higienização profunda, instalação e manutenção de ar-condicionado em Paranavaí e região com Mateus Alves."
+>
+  <Header />
+  <main id="deck-container" class="w-full">
+    <Hero />
+    <BentoDetails />
+    <Services />
+    <HowItWorks />
+    <Footer />
+  </main>
+</BaseLayout>

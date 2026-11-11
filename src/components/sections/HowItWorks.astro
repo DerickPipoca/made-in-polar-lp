@@ -1,0 +1,65 @@
+---
+import { createWhatsAppUrl } from '../../utils/whatsapp';
+import ScrollIndicator from '../ui/ScrollIndicator.astro';
+
+const whatsappUrl = createWhatsAppUrl(
+  "5544991416128",
+  "Olá, Mateus! Gostaria de entender melhor como funciona o atendimento da Made In Polar."
+);
+---
+
+<section id="como-funciona" class="deck-slide w-full px-4 sm:px-6 py-3 sm:py-4">
+  <div class="hidden sm:block" aria-hidden="true"></div>
+
+  <div class="max-w-5xl mx-auto w-full my-auto space-y-5 sm:space-y-6">
+    <div class="text-center max-w-xl mx-auto space-y-1">
+      <span class="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-vivid">
+        Passo a Passo
+      </span>
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-white">
+        Como Funciona Nosso Atendimento
+      </h2>
+    </div>
+
+    {/* Grelha 2x2 no Mobile e 4 colunas no Desktop */}
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+      <div class="p-4 sm:p-5 rounded-2xl bg-navy/60 border border-white/10 space-y-1.5 sm:space-y-2">
+        <span class="text-[10px] sm:text-[11px] font-black px-2 py-0.5 rounded bg-vivid/20 text-vivid inline-block">01. CONTATO</span>
+        <h3 class="text-sm sm:text-base font-bold text-white">WhatsApp</h3>
+        <p class="text-[11px] sm:text-xs text-slate-400 leading-relaxed">Informe quantos aparelhos tem direto ao Mateus.</p>
+      </div>
+
+      <div class="p-4 sm:p-5 rounded-2xl bg-navy/60 border border-white/10 space-y-1.5 sm:space-y-2">
+        <span class="text-[10px] sm:text-[11px] font-black px-2 py-0.5 rounded bg-vivid/20 text-vivid inline-block">02. HORÁRIO</span>
+        <h3 class="text-sm sm:text-base font-bold text-white">Agendamento</h3>
+        <p class="text-[11px] sm:text-xs text-slate-400 leading-relaxed">Orçamento transparente e dia agendado sem atrasos.</p>
+      </div>
+
+      <div class="p-4 sm:p-5 rounded-2xl bg-navy/60 border border-white/10 space-y-1.5 sm:space-y-2">
+        <span class="text-[10px] sm:text-[11px] font-black px-2 py-0.5 rounded bg-vivid/20 text-vivid inline-block">03. EXECUÇÃO</span>
+        <h3 class="text-sm sm:text-base font-bold text-white">Zero Sujeira</h3>
+        <p class="text-[11px] sm:text-xs text-slate-400 leading-relaxed">Lavagem com bolsa coletora impermeável no local.</p>
+      </div>
+
+      <div class="p-4 sm:p-5 rounded-2xl bg-navy/60 border border-white/10 space-y-1.5 sm:space-y-2">
+        <span class="text-[10px] sm:text-[11px] font-black px-2 py-0.5 rounded bg-yellow/20 text-yellow inline-block">04. CONFORTO</span>
+        <h3 class="text-sm sm:text-base font-bold text-white">Ar Testado</h3>
+        <p class="text-[11px] sm:text-xs text-slate-400 leading-relaxed">Vazão máxima, higienizado e com garantia de serviço.</p>
+      </div>
+    </div>
+
+    <div class="text-center pt-1">
+      <a
+        href={whatsappUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-vivid hover:text-white transition"
+      >
+        <span>Agendar visita técnica no WhatsApp</span>
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <ScrollIndicator targetId="#contato" label="Dúvidas e Contato" />
+</section>

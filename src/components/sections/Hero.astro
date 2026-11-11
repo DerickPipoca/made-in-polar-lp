@@ -1,0 +1,165 @@
+---
+import { createWhatsAppUrl } from '../../utils/whatsapp';
+import ScrollIndicator from '../ui/ScrollIndicator.astro';
+
+const whatsappUrl = createWhatsAppUrl(
+  "5544991416128",
+  "Olá, Mateus! Vim pelo site da Made In Polar e gostaria de um orçamento para meu ar-condicionado em Paranavaí."
+);
+---
+
+<section id="inicio" class="deck-slide is-active relative overflow-hidden">
+  
+  {/* Camada de Atmosfera + Ondas Horizontais */}
+  <div class="absolute inset-0 pointer-events-none overflow-hidden z-0 flex items-center justify-center">
+    
+    {/* Brilho central suave para destacar o texto sobre as ondas */}
+    <div class="w-[320px] sm:w-150 h-80 sm:h-100 bg-vivid/10 rounded-full blur-[110px]"></div>
+
+    <div class="absolute inset-x-0 top-[54%] -translate-y-1/2 h-64 sm:h-80 w-full opacity-40">
+      <svg 
+        class="wave-slow absolute top-0 left-0 w-[200%] h-full" 
+        viewBox="0 0 2880 320" 
+        fill="none" 
+        preserveAspectRatio="none"
+      >
+        <path 
+          d="M 0 160 Q 360 40, 720 160 T 1440 160 T 2160 160 T 2880 160" 
+          stroke="url(#wave-grad-vivid)" 
+          stroke-width="2" 
+        />
+        <defs>
+          <linearGradient id="wave-grad-vivid" x1="0" y1="0" x2="1440" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#0099ff" stop-opacity="0.1" />
+            <stop offset="50%" stop-color="#0099ff" stop-opacity="0.95" />
+            <stop offset="100%" stop-color="#0099ff" stop-opacity="0.1" />
+          </linearGradient>
+        </defs>
+      </svg>
+
+      <svg 
+        class="wave-slower absolute top-5 left-0 w-[200%] h-full opacity-60" 
+        viewBox="0 0 2880 320" 
+        fill="none" 
+        preserveAspectRatio="none"
+      >
+        <path 
+          d="M 0 180 Q 360 290, 720 180 T 1440 180 T 2160 180 T 2880 180" 
+          stroke="#0161ac" 
+          stroke-width="1.25" 
+        />
+      </svg>
+
+      <svg 
+        class="wave-slowest absolute -top-4 left-0 w-[200%] h-full opacity-45" 
+        viewBox="0 0 2880 320" 
+        fill="none" 
+        preserveAspectRatio="none"
+      >
+        <path 
+          d="M 0 140 Q 360 80, 720 140 T 1440 140 T 2160 140 T 2880 140" 
+          stroke="#0077d4" 
+          stroke-width="1.5" 
+        />
+      </svg>
+    </div>
+  </div>
+
+  {/* Espaçador superior para o flex-between */}
+  <div aria-hidden="true"></div>
+
+  {/* Conteúdo Central */}
+  <div class="relative z-10 max-w-3xl mx-auto text-center flex flex-col items-center gap-[clamp(1rem,2.4vh,1.75rem)] my-auto px-2">
+
+    {/* Pílula Superior de Localização e Especialidade */}
+    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-navy/80 border border-vivid/25 shadow-[0_0_20px_-5px_rgba(0,153,255,0.3)] backdrop-blur-md">
+      <span class="w-2 h-2 rounded-full bg-vivid animate-pulse"></span>
+      <span class="text-[11px] sm:text-xs font-semibold tracking-wide text-ice">
+        Paranavaí e Região • Climatização & Elétrica
+      </span>
+    </div>
+
+    <h1 class="text-[clamp(2rem,min(4.8vw,6.5vh),4rem)] font-extrabold tracking-tight text-white leading-[1.1] flex flex-col gap-1.5 sm:gap-2">
+      <span class="block">
+        Conforto que você <span class="bg-linear-to-r from-violet-300 to-blue-400 bg-clip-text text-transparent drop-shadow-[0_2px_15px_rgba(0,153,255,0.25)]">Merece</span>
+      </span>
+      <span class="block">
+        Qualidade que você <span class="bg-linear-to-r from-blue-400 to-violet-300 bg-clip-text text-transparent drop-shadow-[0_2px_15px_rgba(0,153,255,0.25)]">Confia</span>
+      </span>
+    </h1>
+
+    <p class="text-[clamp(0.9rem,min(1.5vw,2.3vh),1.15rem)] text-slate-300 max-w-lg mx-auto leading-relaxed">
+      Instalação, higienização e manutenção de ar-condicionado com segurança, qualidade e satisfação.
+    </p>
+
+    <div class="pt-1 flex flex-col items-center gap-3.5 w-full">
+      <a
+        href={whatsappUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group px-8 py-3.5 sm:py-4 rounded-full bg-vivid hover:bg-blue text-white font-bold text-sm sm:text-base border-t border-white/25 transition-all duration-300 shadow-[0_10px_35px_-5px_rgba(0,153,255,0.55)] hover:shadow-[0_12px_40px_-3px_rgba(0,153,255,0.75)] flex items-center gap-3 active:scale-95"
+      >
+        <span>Solicitar orçamento agora</span>
+        <svg class="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+
+      {/* Selos rápidos de prova de valor */}
+      <div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[11px] sm:text-xs text-slate-400 font-medium">
+        <span class="flex items-center gap-1">
+          <svg class="w-3.5 h-3.5 text-vivid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>
+          Resposta rápida
+        </span>
+        <span class="text-white/20">•</span>
+        <span class="flex items-center gap-1">
+          <svg class="w-3.5 h-3.5 text-vivid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>
+          Garantia de serviço
+        </span>
+        <span class="text-white/20 hidden xs:inline">•</span>
+        <span class="hidden xs:flex items-center gap-1">
+          <svg class="w-3.5 h-3.5 text-vivid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>
+          Nota Fiscal
+        </span>
+      </div>
+    </div>
+
+  </div>
+
+  <ScrollIndicator targetId="#beneficios" label="Role para explorar" />
+</section>
+
+<style>
+  @keyframes moveWaveLeft {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+    100% {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+
+  @keyframes moveWaveRight {
+    0% {
+      transform: translate3d(-50%, 0, 0);
+    }
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  .wave-slow {
+    animation: moveWaveLeft 18s linear infinite;
+    will-change: transform;
+  }
+
+  .wave-slower {
+    animation: moveWaveRight 26s linear infinite;
+    will-change: transform;
+  }
+
+  .wave-slowest {
+    animation: moveWaveLeft 34s linear infinite;
+    will-change: transform;
+  }
+</style>

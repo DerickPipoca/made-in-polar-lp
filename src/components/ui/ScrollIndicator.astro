@@ -1,0 +1,24 @@
+---
+interface Props {
+  targetId: string;
+  label?: string;
+  up?: boolean;
+}
+
+const { targetId, label = "Role para explorar" } = Astro.props;
+---
+
+<div class="w-full flex justify-center pt-2 pb-2 sm:pt-6 sm:pb-4 shrink-0">
+  <a 
+    href={targetId} 
+    aria-label={label}
+    class="group inline-flex flex-col items-center gap-1 text-slate-400 hover:text-vivid transition-colors"
+  >
+    <span class="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] font-medium group-hover:tracking-[0.25em] transition-all duration-300">
+      {label}
+    </span>
+    <svg class="w-4 h-4 animate-bounce text-vivid/80 group-hover:text-vivid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m6 9 6 6 6-6"/>
+    </svg>
+  </a>
+</div>

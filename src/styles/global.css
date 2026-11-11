@@ -1,14 +1,83 @@
 @import "tailwindcss";
 
+@theme {
+  --color-dark: #081730;
+  --color-navy: #0b2246;
+  --color-blue: #0077d4;
+  --color-vivid: #0099ff;
+  --color-ice: #e2f3fe;
+  --color-yellow: #f5a623;
+  --color-whatsapp: #25d366;
+  --color-whatsapp-hover: #1da851;
+  --color-cta: #059669;
+  --color-cta-hover: #047857;
+
+  --font-sans:
+    system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
 @layer base {
-  html {
-    scroll-behavior: smooth;
-    font-family:
-      system-ui,
-      -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      Roboto,
-      sans-serif;
+  html,
+  body {
+    height: 100dvh;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: var(--font-sans);
+    background-color: #061022;
+    color: #f8fafc;
   }
+}
+
+/* Container de rolagem controlada (sem scroll-snap nativo dando puxões no fim) */
+#deck-container {
+  position: relative;
+  height: calc(100dvh - 4rem);
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none; /* Oculta barra de rolagem no Firefox */
+}
+
+#deck-container::-webkit-scrollbar {
+  display: none; /* Oculta barra de rolagem no Chrome/Safari/Edge */
+}
+
+@media (min-width: 640px) {
+  #deck-container {
+    height: calc(100dvh - 5rem);
+  }
+}
+
+/* A caixa da seção fica 100% fixa na geometria (sem transform) */
+.deck-slide {
+  min-height: 100%;
+  height: 100%;
+  width: 100%;
+  padding: 1.25rem 1.5rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Quem anima são apenas os elementos internos da seção */
+.deck-slide > * {
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.deck-slide:not(.is-active) > * {
+  opacity: 0;
+  transform: translateY(1.25rem) scale(0.98);
+  pointer-events: none;
+}
+
+.deck-slide.is-active > * {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
 }

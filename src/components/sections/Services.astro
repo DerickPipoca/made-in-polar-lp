@@ -1,0 +1,75 @@
+---
+import { createWhatsAppUrl } from '../../utils/whatsapp';
+import ScrollIndicator from '../ui/ScrollIndicator.astro';
+
+const whatsappNumber = "5544991416128";
+
+const services = [
+  {
+    title: "Higienização Profunda",
+    desc: "Lavagem pressurizada da turbina e serpentina no local com bolsa coletora impermeável.",
+    msg: "Olá, Mateus! Gostaria de um orçamento para Higienização Profunda de ar-condicionado."
+  },
+  {
+    title: "Instalação Profissional",
+    desc: "Dimensionamento correto, vácuo na linha e tubulação adequada para máxima durabilidade.",
+    msg: "Olá, Mateus! Gostaria de um orçamento para Instalação de ar-condicionado."
+  },
+  {
+    title: "Manutenção Técnica",
+    desc: "Carga de fluido refrigerante, troca de capacitores e conserto de vazamentos de água.",
+    msg: "Olá, Mateus! Meu ar-condicionado precisa de Manutenção técnica. Podem me ajudar?"
+  },
+  {
+    title: "Elétrica & Refrigeração",
+    desc: "Circuitos dedicados, disjuntores de proteção e conformidade para residências e clínicas.",
+    msg: "Olá, Mateus! Preciso de atendimento para Elétrica / Refrigeração."
+  }
+];
+---
+
+<section id="servicos" class="deck-slide w-full px-4 sm:px-6">
+  <div class="hidden sm:block" aria-hidden="true"></div>
+
+  <div class="max-w-5xl mx-auto w-full my-auto space-y-3 sm:space-y-6">
+    
+    {/* Cabeçalho com margem garantida */}
+    <div class="text-center max-w-xl mx-auto space-y-0.5 sm:space-y-1">
+      <span class="block text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-vivid">
+        Soluções Completas
+      </span>
+      <h2 class="text-xl sm:text-3xl font-extrabold text-white leading-tight">
+        O Que Você Precisa Resolver Hoje?
+      </h2>
+    </div>
+
+    {/* Grelha de Cartões Otimizada para Altura Mobile */}
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
+      {services.map((s) => (
+        <a 
+          href={createWhatsAppUrl(whatsappNumber, s.msg)}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group p-3 sm:p-6 rounded-2xl bg-navy/60 border border-white/10 hover:border-vivid/40 transition flex flex-col justify-between space-y-1 sm:space-y-3 text-left active:scale-[0.99]"
+        >
+          <div class="flex items-center justify-between gap-2">
+            <h3 class="text-sm sm:text-lg font-bold text-white group-hover:text-vivid transition leading-snug">
+              {s.title}
+            </h3>
+            <span class="inline-flex items-center gap-1 text-[11px] sm:text-xs font-bold text-vivid shrink-0">
+              <span>Orçar</span>
+              <svg class="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </div>
+          
+          <p class="text-[11px] sm:text-sm text-slate-300 leading-snug sm:leading-relaxed">
+            {s.desc}
+          </p>
+        </a>
+      ))}
+    </div>
+
+  </div>
+
+  <ScrollIndicator targetId="#como-funciona" label="Como funciona o serviço" />
+</section>
